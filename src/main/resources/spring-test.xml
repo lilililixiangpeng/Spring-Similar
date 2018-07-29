@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+
+    <bean id="person" class="com.spring.model.Person">
+        <property name="age" value="1111"/>
+        <property name="addres" value="BJ"/>
+        <property name="name" value="tom"/>
+    </bean>
+</beans>
