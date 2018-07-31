@@ -1,13 +1,8 @@
 package com.spring.InitializeClass;
 
-import com.spring.SpringInfo.Bean;
 import com.spring.SpringInfo.ConfigManager;
-import com.spring.SpringInfo.Property;
-import com.spring.assignment.SpringUtils;
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.lang.StringUtils;
+import com.spring.assignment.SpringXmlUtils;
 
-import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -21,7 +16,7 @@ public class XmlApplicationContext {
     public XmlApplicationContext(String path){
         map = ConfigManager.getConfig(path);
         try {
-            SpringUtils.XMLBeanSet(map, applicActionContext);
+            SpringXmlUtils.XMLBeanSet(map, applicActionContext);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -30,6 +25,5 @@ public class XmlApplicationContext {
     public Object getObject(String objectname){
         return applicActionContext.get(objectname);
     }
-
 
 }

@@ -4,8 +4,6 @@ package com.spring.model;
  * Created by lixiangpeng on 2018/7/29.
  */
 
-import java.lang.reflect.Method;
-
 public class Person implements java.io.Serializable{
     /**
      *
@@ -14,6 +12,7 @@ public class Person implements java.io.Serializable{
     private String name;
     private int age;
     private String addres;
+     teset teset;
 
     public Person() {}
 
@@ -34,6 +33,10 @@ public class Person implements java.io.Serializable{
     }
     public void setAddres(String addres) {
         this.addres = addres;
+    }
+
+    public void say(){
+        System.out.println("est");
     }
 
     @Override
