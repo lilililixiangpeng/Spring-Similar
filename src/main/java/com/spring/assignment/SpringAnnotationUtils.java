@@ -12,23 +12,26 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class SpringAnnotationUtils {
 
-    static Object object;
-
     public static void AnnoSetBean(List<String> classpaths, ConcurrentHashMap<String, Object> applicActionContext) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException {
         for (int i = 0;i < classpaths.size();i++){
             Class<?> clazz = Class.forName(classpaths.get(i));
             if (clazz.isAnnotationPresent(Bean.class)){
                 Object object = clazz.newInstance();
                 Bean classBean = clazz.getAnnotation(Bean.class);
-                if (classBean.name() == ""){
-                    String beanName = clazz.getSimpleName();
+                String beanName = clazz.getSimpleName();
+                if (classBean.name() != ""){
+                    beanName = classBean.name();
                 }
                 Field[] fields = clazz.getDeclaredFields();
                 for (Field field:fields) {
                     if (field.isAnnotationPresent(Autowired.class)){
-                        field.getType().getCanonicalName();
+                        String typename = field.getType().getCanonicalName();
+                        Class<?> fieldclass = Class.forName(typename);
+                        field.setAccessible(true);
+                        field.set(object,fieldclass.newInstance());
                     }
                 }
+                applicActionContext.put(beanName,object);
             }
         }
     }
